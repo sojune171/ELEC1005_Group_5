@@ -15,6 +15,9 @@ from game import Game
 black = pygame.Color(0, 0, 0)
 white = pygame.Color(255, 255, 255)
 
+#modified
+background = pygame.Color(169, 209, 142)
+
 green = pygame.Color(0, 200, 0)
 bright_green = pygame.Color(0, 255, 0)
 red = pygame.Color(200, 0, 0)
@@ -47,6 +50,12 @@ def message_display(text, x, y, color=black):
     screen.blit(text_surf, text_rect)
     pygame.display.update()
 
+def message_display_small(text, x, y, color=black):
+    small = pygame.font.SysFont('comicsansms', 10)
+    text_surf, text_rect = text_objects(text, small, color)
+    text_rect.center = (x, y)
+    screen.blit(text_surf, text_rect)
+    pygame.display.update()
 
 def button(msg, x, y, w, h, inactive_color, active_color, action=None, parameter=None):
     mouse = pygame.mouse.get_pos()
@@ -86,11 +95,21 @@ def initial_interface():
             if event.type == pygame.QUIT:
                 pygame.quit()
 
-        screen.fill(white)
-        message_display('Gluttonous', game.settings.width / 2 * 15, game.settings.height / 4 * 15)
+        #modified
+        screen.fill(background)
+        message_display('Gluttonous', game.settings.width / 2 * 15, game.settings.height / 8 * 15)
+        message_display_small('On/Off', game.settings.width / 1 * 2, game.settings.height / 1 * 14)
+        button('Go!', 250, 180, 100, 60, green, bright_green, game_loop, 'human')
+        button('Quit', 250, 290, 100, 60, red, bright_red, quitgame)
 
-        button('Go!', 80, 240, 80, 40, green, bright_green, game_loop, 'human')
-        button('Quit', 270, 240, 80, 40, red, bright_red, quitgame)
+        sound_image = pygame.image.load('images/sound_on.png')
+        sound_image = pygame.transform.scale(sound_image, (50, 50))
+        screen.blit(sound_image, (34,330))
+
+        snake_image = pygame.image.load('images/snake.png')
+        snake_image = pygame.transform.scale(snake_image, (240, 200))
+        screen.blit(snake_image, (-20, 130))
+
 
         pygame.display.update()
         pygame.time.Clock().tick(15)
