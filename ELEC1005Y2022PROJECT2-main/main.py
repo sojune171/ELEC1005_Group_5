@@ -83,6 +83,7 @@ pygame.mixer.music.load('./sound/BossTheme.wav')
 pygame.mixer.music.play(-1)
 
 def on_off():
+
         pygame.mixer.music.fadeout(1000)
 
 def quitgame():
@@ -93,7 +94,7 @@ def quitgame():
 def crash():
     pygame.mixer.Sound.play(crash_sound)
     message_display('crashed', game.settings.width / 2 * 15, game.settings.height / 3 * 15, white)
-    time.sleep(3)
+    time.sleep(2)
 
 def initial_interface():
     intro = True
@@ -114,7 +115,6 @@ def initial_interface():
         snake_image = pygame.image.load('images/snake.png')
         snake_image = pygame.transform.scale(snake_image, (240, 200))
         screen.blit(snake_image, (-20, 130))
-
 
 
         pygame.display.update()
@@ -143,6 +143,7 @@ def game_loop(player, fps=10):
 
         screen.fill(background)
         drawGrid()
+        button('Music', 20, 360, 60, 40, grey, bright_grey, on_off)
         game.snake.blit(rect_len, screen)
         game.strawberry.blit(screen)
         game.blit_score(white, screen)
