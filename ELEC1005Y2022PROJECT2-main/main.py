@@ -82,9 +82,15 @@ def button(msg, x, y, w, h, inactive_color, active_color, action=None, parameter
 pygame.mixer.music.load('./sound/BossTheme.wav')
 pygame.mixer.music.play(-1)
 
-def on_off():
 
+
+
+def on_off():
+    music_playing = pygame.mixer.music.get_busy()
+    if music_playing:
         pygame.mixer.music.fadeout(1000)
+        return
+    pygame.mixer.music.play()
 
 def quitgame():
     pygame.quit()
