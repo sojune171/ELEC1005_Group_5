@@ -17,6 +17,7 @@ white = pygame.Color(255, 255, 255)
 
 #modified
 background = pygame.Color(169, 209, 142)
+grid = pygame.Color(112,173,71)
 
 green = pygame.Color(0, 200, 0)
 bright_green = pygame.Color(0, 255, 0)
@@ -36,6 +37,7 @@ screen = pygame.display.set_mode((game.settings.width * 15, game.settings.height
 pygame.display.set_caption('Gluttonous')
 
 crash_sound = pygame.mixer.Sound('./sound/crash.wav')
+#music = pygame.mixer.Sound
 
 
 def text_objects(text, font, color=black):
@@ -48,14 +50,14 @@ def message_display(text, x, y, color=black):
     text_surf, text_rect = text_objects(text, large_text, color)
     text_rect.center = (x, y)
     screen.blit(text_surf, text_rect)
-    pygame.display.update()
+
 
 def message_display_small(text, x, y, color=black):
     small = pygame.font.SysFont('comicsansms', 10)
     text_surf, text_rect = text_objects(text, small, color)
     text_rect.center = (x, y)
     screen.blit(text_surf, text_rect)
-    pygame.display.update()
+
 
 def button(msg, x, y, w, h, inactive_color, active_color, action=None, parameter=None):
     mouse = pygame.mouse.get_pos()
@@ -115,6 +117,14 @@ def initial_interface():
         pygame.time.Clock().tick(15)
 
 
+
+def drawGrid():
+    blockSize = 15
+    for x in range(0, 410, blockSize):
+        for y in range(0, 410, blockSize):
+            rect = pygame.Rect(x, y, blockSize, blockSize)
+            pygame.draw.rect(screen, grid, rect, 1)
+
 def game_loop(player, fps=10):
     game.restart_game()
 
@@ -127,8 +137,8 @@ def game_loop(player, fps=10):
 
         game.do_move(move)
 
-        screen.fill(black)
-
+        screen.fill(background)
+        drawGrid()
         game.snake.blit(rect_len, screen)
         game.strawberry.blit(screen)
         game.blit_score(white, screen)
@@ -136,6 +146,8 @@ def game_loop(player, fps=10):
         pygame.display.flip()
 
         fpsClock.tick(fps)
+
+
 
     crash()
 

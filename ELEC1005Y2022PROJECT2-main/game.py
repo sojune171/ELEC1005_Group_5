@@ -7,6 +7,7 @@ Created on Wed Apr 25 15:19:25 2018
 import pygame, random
 import numpy as np
 
+
 class Settings:
     def __init__(self):
         self.width = 28
