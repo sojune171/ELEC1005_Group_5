@@ -14,7 +14,8 @@ from game import Game
 
 black = pygame.Color(0, 0, 0)
 white = pygame.Color(255, 255, 255)
-
+grey = pygame.Color(108, 122, 137)
+bright_grey = pygame.Color(210, 215, 211)
 #modified
 background = pygame.Color(169, 209, 142)
 grid = pygame.Color(112,173,71)
@@ -37,7 +38,7 @@ screen = pygame.display.set_mode((game.settings.width * 15, game.settings.height
 pygame.display.set_caption('Gluttonous')
 
 crash_sound = pygame.mixer.Sound('./sound/crash.wav')
-#music = pygame.mixer.Sound
+background_music = pygame.mixer.Sound('./sound/BossTheme.wav')
 
 
 def text_objects(text, font, color=black):
@@ -78,6 +79,12 @@ def button(msg, x, y, w, h, inactive_color, active_color, action=None, parameter
     screen.blit(TextSurf, TextRect)
 
 
+pygame.mixer.music.load('./sound/BossTheme.wav')
+pygame.mixer.music.play(-1)
+
+def on_off():
+        pygame.mixer.music.fadeout(1000)
+
 def quitgame():
     pygame.quit()
     quit()
@@ -86,8 +93,7 @@ def quitgame():
 def crash():
     pygame.mixer.Sound.play(crash_sound)
     message_display('crashed', game.settings.width / 2 * 15, game.settings.height / 3 * 15, white)
-    time.sleep(1)
-
+    time.sleep(3)
 
 def initial_interface():
     intro = True
@@ -97,20 +103,18 @@ def initial_interface():
             if event.type == pygame.QUIT:
                 pygame.quit()
 
-        #modified
+
         screen.fill(background)
         message_display('Gluttonous', game.settings.width / 2 * 15, game.settings.height / 8 * 15)
-        message_display_small('On/Off', game.settings.width / 1 * 2, game.settings.height / 1 * 14)
         button('Go!', 250, 180, 100, 60, green, bright_green, game_loop, 'human')
         button('Quit', 250, 290, 100, 60, red, bright_red, quitgame)
-
-        sound_image = pygame.image.load('images/sound_on.png')
-        sound_image = pygame.transform.scale(sound_image, (50, 50))
-        screen.blit(sound_image, (34,330))
+        button('Music', 20, 360, 60, 40, grey, bright_grey, on_off)
+        message_display_small('On/Off', game.settings.width / 1 * 1.7, game.settings.height / 1 * 14.5)
 
         snake_image = pygame.image.load('images/snake.png')
         snake_image = pygame.transform.scale(snake_image, (240, 200))
         screen.blit(snake_image, (-20, 130))
+
 
 
         pygame.display.update()
