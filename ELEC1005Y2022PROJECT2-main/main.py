@@ -59,6 +59,8 @@ def message_display_small(text, x, y, color=black):
     text_rect.center = (x, y)
     screen.blit(text_surf, text_rect)
 
+def get_music_playing():
+    return pygame.mixer.music.get_busy()
 
 def button(msg, x, y, w, h, inactive_color, active_color, action=None, parameter=None):
     mouse = pygame.mouse.get_pos()
@@ -115,7 +117,7 @@ def initial_interface():
         message_display('Gluttonous', game.settings.width / 2 * 15, game.settings.height / 8 * 15)
         button('Go!', 250, 180, 100, 60, green, bright_green, game_loop, 'human')
         button('Quit', 250, 290, 100, 60, red, bright_red, quitgame)
-        button('Music', 20, 360, 60, 40, grey, bright_grey, on_off)
+        button("Music: ON" if get_music_playing() else "Music: OFF", 20, 360, 120, 40, grey, bright_grey, on_off)
         message_display_small('On/Off', game.settings.width / 1 * 1.7, game.settings.height / 1 * 14.5)
 
         snake_image = pygame.image.load('images/snake.png')
@@ -149,7 +151,7 @@ def game_loop(player, fps=10):
 
         screen.fill(background)
         drawGrid()
-        button('Music', 20, 360, 60, 40, grey, bright_grey, on_off)
+        button("Music: ON" if get_music_playing() else "Music: OFF", 20, 360, 120, 40, grey, bright_grey, on_off)
         game.snake.blit(rect_len, screen)
         game.strawberry.blit(screen)
         game.blit_score(white, screen)
