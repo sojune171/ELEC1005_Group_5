@@ -151,7 +151,7 @@ def game_loop(player, fps=10):
 
         screen.fill(background)
         drawGrid()
-        button("Music: ON" if get_music_playing() else "Music: OFF", 20, 360, 120, 40, grey, bright_grey, on_off)
+        button("Music: ON" if get_music_playing() else "Music: OFF", 315, 0, 105, 30, grey, bright_grey, on_off)
         game.snake.blit(rect_len, screen)
         game.strawberry.blit(screen)
         game.blit_score(white, screen)
