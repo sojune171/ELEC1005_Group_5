@@ -90,7 +90,7 @@ pygame.mixer.music.play(-1)
 def on_off():
     music_playing = pygame.mixer.music.get_busy()
     if music_playing:
-        pygame.mixer.music.fadeout(1000)
+        pygame.mixer.music.fadeout(500)
         return
     pygame.mixer.music.play()
 
