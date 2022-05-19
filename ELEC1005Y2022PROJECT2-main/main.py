@@ -38,7 +38,7 @@ screen = pygame.display.set_mode((game.settings.width * 15, game.settings.height
 pygame.display.set_caption('Gluttonous')
 
 crash_sound = pygame.mixer.Sound('./sound/crash.wav')
-background_music = pygame.mixer.Sound('./sound/BossTheme.wav')
+background_music = pygame.mixer.Sound('./sound/Happy Accident Advanced Loop With Intro.wav')
 
 
 def text_objects(text, font, color=black):
@@ -81,7 +81,7 @@ def button(msg, x, y, w, h, inactive_color, active_color, action=None, parameter
     screen.blit(TextSurf, TextRect)
 
 
-pygame.mixer.music.load('./sound/BossTheme.wav')
+pygame.mixer.music.load('./sound/Happy Accident Advanced Loop With Intro.wav')
 pygame.mixer.music.play(-1)
 
 
