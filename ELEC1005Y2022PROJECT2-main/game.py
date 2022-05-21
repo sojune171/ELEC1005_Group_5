@@ -45,6 +45,7 @@ class Snake:
         self.facing = "right"
         self.initialize()
 
+    #Snake will only start facing right now
     def initialize(self):
         self.position = [6, 6]
         self.segments = [[6 - i, 6] for i in range(3)]
