@@ -129,9 +129,6 @@ class Strawberry():
 
 
 class Game:
-    """
-    """
-
     def __init__(self):
         # Try to read the rank table, create an empty list if the rank record does not exist
         if os.path.exists("Rank.json"):
